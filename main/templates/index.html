@@ -18,15 +18,13 @@
   </head>
   <body>
     <div class="upper__content">
-      <div class="title">Korean Three Words Challenge</div>
+      <div class="title">Everyday Korean Challenge</div>
 
       <div class="prompt__box">
-        <div class="today__date">{{keywords.release_date|date:"D d M"}}</div>
+        <div class="today__date">{{keywords.release_date|date:"M d"}}</div>
         <h2 class="prompt">{{key}}</h2>
         <h4 class="prompt__translate">{{keywords.translation}} | {{keywords.pronunciation}}</h4>
-        <h3 class="prompt__sub">
-          <a href="#">Look for other keywords</a>
-        </h3>
+
       </div>
       <button class="write__button">
         <a href="{% url 'go_create' %}">
@@ -53,7 +51,7 @@
           <div class="content__clock">
             <div class="clock__left">
               <span class="nation">{{elem.nation}}</span>
-              <span class="nikname">김의중</span> {{elem.release_date|date:"H:i D d M"}}
+              <span class="nikname">김의중</span> {{elem.release_date|date:"H:i"}}
             </div>
 
             <button class="translate">See the translation</button>
@@ -87,6 +85,6 @@
     {% endfor %}
     </ul>
 
-    <!-- <script src="{% static 'threesam.js' %}"></script> -->
+    <script src="{% static 'threesam.js' %}"></script>
   </body>
 </html>
