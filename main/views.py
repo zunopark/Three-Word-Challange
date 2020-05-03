@@ -9,6 +9,7 @@ from django.contrib import messages
 
 current_keyword = ""
 current_pk = 0
+my_first_name = ""
 
 
 ## 용섭 작업 위해서
@@ -20,6 +21,12 @@ def list(request):
 
 # 아직 미완성
 banned_word = ['섹스', 'fuck']
+
+#한글 이름 만들기
+korean_name = ['이지은', '김하늘', '홍길동', '김철수철수']
+
+def generate_name(korean_name):
+    return random.choice(korean_name)
 
 def home(request):
     global current_keyword
@@ -59,6 +66,9 @@ def home(request):
 def go_create(request):
     global current_keyword
     global current_pk
+    global my_first_name
+
+    my_first_name = generate_name(korean_name)
 
     first = current_keyword[0]
     second = current_keyword[1]
@@ -76,7 +86,8 @@ def go_create(request):
         'second' : second,
         'third' : third,
         'exp' : exp,
-        'nation' : nation
+        'nation' : nation,
+        'my_first_name' : my_first_name,
     }
     return render(request, 'write.html', context)
 
@@ -95,21 +106,19 @@ def create_post(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
-            print('valid')
             post = form.save(commit=False)
 
             post.first = request.POST.get("first")
             post.second = request.POST.get("second")
             post.third = request.POST.get("third")
-            post.nation = request.POST.get("nation")
-            post.first_translation = request.POST.get("first_translation")
-            post.second_translation = request.POST.get("second_translation")
-            post.third_translation = request.POST.get("third_translation")
+            post.nation_name = request.POST.get("nation")
 
-            # 단어 예외 처리
-            # if check_word(post):
-            #     messages.add_message(request, messages.WARNING, '올바른 단어를 사용하자!')
-            #     return redirect('go_create')
+            post.nickname = my_first_name
+
+            #단어 예외 처리
+            if check_word(post):
+                messages.add_message(request, messages.WARNING, '올바른 단어를 사용하자!')
+                return redirect('go_create')
 
             post.keyword = key
             post.save()

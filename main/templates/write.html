@@ -56,18 +56,19 @@
         />
       </p> -->
       <div class="prompt__info">
-        Your first Korean nickname is "김준수{{my_first_name}}"
+        Your first Korean nickname is "{{my_first_name}}"
       </div>
       <select name="nation" id="nation">
         <option value="">What is your country?</option>
         {% for elem in nation %}
-        <option value="학생">{{elem.name}}</option>
-        {% endfor %}
+        <option value="{{elem.name}}">{{elem.name}}</option>
+        {%endfor%}
       </select>
       <p>
         <input type="submit" value="Share My Three Words!" class="submit" />
       </p>
     </form>
+
     <div class="prompt__info">{{exp}}</div>
 
     <!-- <a href="{% url 'home' %}">
