@@ -22,28 +22,29 @@
       <p class="write__text__column">
         <span class="write__prompt">{{first}}</span>
         <input class="first" name="first" id="first" placeholder="Korean" />
-        <input class="first" name="first_translation"  id="first_translation" placeholder="English translation(options)" />
+        <input class="first" name="first_translation" id="first_translation" placeholder="English translation(options)" />
       </p>
       <p class="write__text__column">
         <span class="write__prompt">{{second}}</span>
-        <input class="second" name="second"  id="second" placeholder="Korean" />
-        <input class="second" name="first_translation"  id="second_translation" placeholder="English translation(options)" />
+        <input class="second" name="second" id="second" placeholder="Korean" />
+        <input class="second" name="second_translation" id="second_translation" placeholder="English translation(options)" />
       </p>
       <p class="write__text__column">
         <span class="write__prompt">{{third}}</span>
-        <input class="third" name="third"  id="third" placeholder="Korean" />
-        <input class="third" name="first_translation"  id="third_translation" placeholder="English translation(options)" />
+        <input class="third" name="third" id="third" placeholder="Korean" />
+        <input class="third" name="third_translation" id="third_translation" placeholder="English translation(options)" />
       </p>
       <select name="nation" id="nation">
-        <option value="">Nation</option>
         {% for elem in nation %}
-          <option value="학생">{{elem.name}}</option>
+          <option value="{{elem.name}}">{{elem.name}}</option>
         {% endfor %}
       </select>
+      <div class="prompt__info">Your first Korean nickname is "{{my_first_name}}"</div>
       <p>
         <input type="submit" value="Share My Three Words!" class="submit" />
       </p>
     </form>
+
     <div class="prompt__info">{{exp}}</div>
 
     <!-- <a href="{% url 'home' %}">

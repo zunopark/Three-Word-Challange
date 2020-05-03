@@ -30,9 +30,42 @@ class Nation(models.Model):
         ('Afghanistan', '아프가니스탄'),
         ('Albania', '알바니아'),
         ('Algeria', '알제리아'),
-        ('Andorra', '안도라')
+        ('Andorra', '안도라'),
+        ('Angola', '앙골라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
+        ('Andorra', '안도라'),
     )
-# Angola
 # Antigua and Barbuda
 # Argentina
 # Armenia
@@ -242,14 +275,18 @@ class Nation(models.Model):
 class Post(models.Model):
     objects = models.Manager()
     keyword = models.ForeignKey(Keyword, on_delete=models.CASCADE)
-    nation = models.ForeignKey(Nation, on_delete=models.CASCADE)
+    # nation = models.ForeignKey(Nation, on_delete=models.CASCADE)
+
+    nation_name = models.CharField(max_length=100, null=False)
 
     first = models.CharField(max_length=100, null=False)
-    first_translation = models.TextField(null=True, default="")
+    first_translation = models.TextField(blank=True)
     second = models.CharField(max_length=100, null=False)
-    second_translation = models.TextField(null=True, default="")
+    second_translation = models.TextField(blank=True)
     third = models.CharField(max_length=100, null=False)
-    third_translation = models.TextField(null=True, default="")
+    third_translation = models.TextField(blank=True)
+
+    nickname = models.CharField(max_length=100, null=False)
     
     # 날짜 시간까지
     release_date = models.DateTimeField(auto_now_add=True)
