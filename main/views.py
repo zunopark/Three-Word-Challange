@@ -23,7 +23,7 @@ def list(request):
 banned_word = ['섹스', 'fuck']
 
 #한글 이름 만들기
-korean_name = ['이지은', '김하늘', '홍길동', '김철수철수']
+korean_name = ['이지은', '김하늘', '홍길동', '김철수철수', '한민지']
 
 def generate_name(korean_name):
     return random.choice(korean_name)
