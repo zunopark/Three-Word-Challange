@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css'%}" />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+
+    <title>Korean Three Word Challenge</title>
+  </head>
+  <body>
+    <div class="upper__content">
+      <div class="title">Korean Three Words Challenge</div>
+
+      <div class="prompt__box">
+        <div class="today__date">{{keywords.release_date|date:"D d M"}}</div>
+        <h2 class="prompt">{{key}}</h2>
+        <h4 class="prompt__translate">{{keywords.translation}} | {{keywords.pronunciation}}</h4>
+        <h3 class="prompt__sub">
+          <a href="#">Look for other keywords</a>
+        </h3>
+      </div>
+      <button class="write__button">
+        <a href="{% url 'go_create' %}">
+          <div class="fas fa-pen"></div>
+          <div class="write">Write Three Words!</div>
+        </a>
+      </button>
+
+      <div class="menu">
+        <div class="selected">
+          <a href="{% url 'readbylike' %}"><span>Popularity</span></a>
+        </div>
+        <div class="unselected">
+          <a href="{% url 'readbydate' %}"><span>Recent</span></a>
+        </div>
+      </div>
+    </div>
+
+
+    <ul class="content">
+    {% for elem in posts %}
+      <li class="content__box scroll">
+        <div class="content__box__column">
+          <div class="content__clock">
+            <div class="clock__left">
+              <span class="nation">{{elem.nation}}</span>
+              <span class="nikname">김의중</span> {{elem.release_date|date:"H:i D d M"}}
+            </div>
+
+            <button class="translate">See the translation</button>
+          </div>
+          <div class="content__wrap">
+            <div class="content__text">
+              <div class="content__text__column">
+                <span class="content__prompt">{{first}}</span>
+                <span class="first">{{elem.first}}</span>
+              </div>
+              <div class="content__text__column">
+                <span class="content__prompt">{{second}}</span>
+                <span class="second">{{elem.second}}</span>
+              </div>
+              <div class="content__text__column">
+                <span class="content__prompt">{{third}}</span>
+                <span class="third">{{elem.third}}</span>
+              </div>
+            </div>
+
+            <a href="{% url 'heart' elem.id %}">
+              <div class="favorite">
+                <i class="fas fa-heart"></i>
+                <div class="favorite__count">{{elem.num_of_like}}</div>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+    </ul>
+
+    <!-- <script src="{% static 'threesam.js' %}"></script> -->
+  </body>
+</html>

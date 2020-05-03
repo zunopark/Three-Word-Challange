@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <title>Korean Three Word Challenge</title>
+  </head>
+  <body>
+    <div class="write__title">Write your three words challenge!</div>
+
+    <form action="{% url 'create' %}" method="POST">
+      {% csrf_token %}
+      <p class="write__text__column">
+        <span class="write__prompt">{{first}}</span>
+        <input class="first" name="first" id="first" placeholder="Korean" />
+        <input class="first" name="first_translation"  id="first_translation" placeholder="English translation(options)" />
+      </p>
+      <p class="write__text__column">
+        <span class="write__prompt">{{second}}</span>
+        <input class="second" name="second"  id="second" placeholder="Korean" />
+        <input class="second" name="first_translation"  id="second_translation" placeholder="English translation(options)" />
+      </p>
+      <p class="write__text__column">
+        <span class="write__prompt">{{third}}</span>
+        <input class="third" name="third"  id="third" placeholder="Korean" />
+        <input class="third" name="first_translation"  id="third_translation" placeholder="English translation(options)" />
+      </p>
+      <select name="nation" id="nation">
+        <option value="">Nation</option>
+        {% for elem in nation %}
+          <option value="학생">{{elem.name}}</option>
+        {% endfor %}
+      </select>
+      <p>
+        <input type="submit" value="Share My Three Words!" class="submit" />
+      </p>
+    </form>
+    <div class="prompt__info">{{exp}}</div>
+
+    <!-- <a href="{% url 'home' %}">
+      <button class="back">Back</button>
+    </a> -->
+
+    {% if messages %}
+    {% for message in messages %}
+      <span class="write__prompt">{{message.tags}}</span>
+      <span class="write__prompt">{{message.message}}</span>
+    {% endfor %}
+    {% endif %}
+
+    <!-- <script src="write.js"></script> -->
+  </body>
+</html>
