@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <title>Previous</title>
+  </head>
+  <body>
+    <nav class="nav">
+      <ul class="nav__list__black">
+        <li class="nav__column">
+          <a href="{% url 'home' %}" class="nav__list-link">
+            <i class="fas fa-home"></i>
+          </a>
+        </li>
+        <li class="nav__column">
+          <a href="{% url 'list' %}" class="nav__list-link">
+            <i class="fas fa-list-ol"></i>
+          </a>
+        </li>
+        <li class="nav__column">
+          <a href="{% url 'rank' %}" class="nav__list-link">
+            <i class="fas fa-trophy nav__selected"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="pre__title">
+      Ranking by country
+    </div>
+    <ul class="menu__grid">
+      <li class="date__li">Date</li>
+      <li class="prompt__li">Prompt</li>
+      <li class="count__li">Count</li>
+      <li class="first__li">1st</li>
+      <li class="second__li">2nd</li>
+      <li class="third__li">3rd</li>
+    </ul>
+    <ul class="content__grid">
+      <li class="date__li">04.30</li>
+      <li class="prompt__li">아이유</li>
+      <li class="count__li">14</li>
+      <li class="first__li">🇮🇹</li>
+      <li class="second__li">🇰🇷</li>
+      <li class="third__li">🇺🇲</li>
+      <li class="date__li">04.29</li>
+      <li class="prompt__li">이순신</li>
+      <li class="count__li">17</li>
+      <li class="first__li">🇺🇲</li>
+      <li class="second__li">🇰🇷</li>
+      <li class="third__li">🇮🇹</li>
+      <li class="date__li">04.28</li>
+      <li class="prompt__li">버거킹</li>
+      <li class="count__li">20</li>
+      <li class="first__li">🇰🇷</li>
+      <li class="second__li">🇮🇹</li>
+      <li class="third__li">🇺🇲</li>
+    </ul>
+
+    <!-- <script src="list.js"></script> -->
+  </body>
+</html>

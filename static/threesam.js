@@ -13,10 +13,9 @@ const promptSelected = `selected__prompt`;
 let isHeartClicked = false;
 
 // function handleBest(event) {
-//   if (best.classList === SELECTED){
+//   if (best.classList === SELECTED) {
 //     best.classList = UNSELECTED;
-//   }
-//   else{
+//   } else {
 //     NodeList.classList = SELECTED;
 //   }
 // }
@@ -32,18 +31,16 @@ let isHeartClicked = false;
 function handleHeart(event) {
   event.toElement.classList.add(`color__yellow`);
   const heartCount = event.target.parentNode.children[1];
-  if (isHeartClicked === false){
+  if (isHeartClicked === false) {
     heartCount.innerText = parseInt(heartCount.innerText) + 1;
     isHeartClicked = true;
-  }
-  else{
-    if (parseInt(heartCount.innerText) <= 0){
+  } else {
+    if (parseInt(heartCount.innerText) <= 0) {
       heartCount.innerText = 0;
-    }
-    else{
+    } else {
       heartCount.innerText = parseInt(heartCount.innerText) - 1;
       isHeartClicked = false;
-      event.toElement.classList.remove('color__yellow');
+      event.toElement.classList.remove("color__yellow");
     }
   }
 }
@@ -67,8 +64,8 @@ function init() {
   // best.addEventListener("click", handleBest);
   // recent.addEventListener("click", handleRecent);
 
-  heart.forEach(function(elem){
-    elem.addEventListener("click", handleHeart)
+  heart.forEach(function (elem) {
+    elem.addEventListener("click", handleHeart);
   });
 
   scroll.forEach((item) => {

@@ -10,6 +10,14 @@ from django.contrib import messages
 current_keyword = ""
 current_pk = 0
 
+
+## 용섭 작업 위해서
+def rank(request):
+    return render(request, 'rank.html')
+
+def list(request):
+    return render(request, 'list.html')
+
 # 아직 미완성
 banned_word = ['섹스', 'fuck']
 

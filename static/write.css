@@ -1,0 +1,107 @@
+.write__title {
+  font-size: 20px;
+  margin-top: 10px;
+  color: white;
+}
+
+.write__prompt {
+  color: #fcbf1e;
+}
+
+.write__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.write__text__column {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 30px;
+}
+
+/* .write__text__column:nth-child(odd) {
+  display: flex;
+  align-items: center;
+  margin-top: 3px;
+} */
+
+.write__text__column .korean {
+  width: 220px;
+  font-size: 20px;
+  margin-left: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, #232526, #414345);
+  outline: none;
+  color: white;
+  font-weight: 300;
+}
+
+.write__text__column .translation {
+  width: 220px;
+  font-size: 13px;
+  padding: 10px;
+  margin-left: 37px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, #232526, #414345);
+  outline: none;
+  color: white;
+  font-weight: 300;
+}
+
+.submit {
+  font-size: 20px;
+  color: white;
+  background-color: gray;
+  margin: 20px 0;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+}
+
+.submit:hover {
+  cursor: pointer;
+}
+
+form {
+  text-align: center;
+}
+
+/* .back {
+  font-size: 15px;
+  color: white;
+  background-color: gray;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  padding: 5px 10px;
+  outline: none;
+  border: none;
+}
+
+.back:hover {
+  cursor: pointer;
+} */
+
+.color__yellow {
+  color: #fcbf1e;
+}
+
+.prompt__info {
+  color: white;
+  padding: 10px 0;
+}
+
+select {
+  width: 200px;
+  font-size: 15px;
+  color: white;
+  font-family: inherit;
+  background: transparent;
+  border-radius: 0px;
+  outline: none;
+}

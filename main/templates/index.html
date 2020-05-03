@@ -17,16 +17,34 @@
     <title>Korean Three Word Challenge</title>
   </head>
   <body>
+    <nav class="nav">
+      <ul class="nav__list">
+        <li class="nav__column">
+          <a href="{% url 'home' %}" class="nav__list-link">
+            <i class="fas fa-home nav__selected"></i>
+          </a>
+        </li>
+        <li class="nav__column">
+          <a href="{% url 'list' %}" class="nav__list-link">
+            <i class="fas fa-list-ol"></i>
+          </a>
+        </li>
+        <li class="nav__column">
+          <a href="{% url 'rank' %}" class="nav__list-link">
+            <i class="fas fa-trophy"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
     <div class="upper__content">
       <div class="title">Korean Three Words Challenge</div>
 
       <div class="prompt__box">
         <div class="today__date">{{keywords.release_date|date:"D d M"}}</div>
         <h2 class="prompt">{{key}}</h2>
-        <h4 class="prompt__translate">{{keywords.translation}} | {{keywords.pronunciation}}</h4>
-        <h3 class="prompt__sub">
-          <a href="#">Look for other keywords</a>
-        </h3>
+        <h4 class="prompt__translate">
+          {{keywords.translation}} | {{keywords.pronunciation}}
+        </h4>
       </div>
       <button class="write__button">
         <a href="{% url 'go_create' %}">
@@ -45,15 +63,15 @@
       </div>
     </div>
 
-
     <ul class="content">
-    {% for elem in posts %}
+      {% for elem in posts %}
       <li class="content__box scroll">
         <div class="content__box__column">
           <div class="content__clock">
             <div class="clock__left">
               <span class="nation">{{elem.nation}}</span>
-              <span class="nikname">김의중</span> {{elem.release_date|date:"H:i D d M"}}
+              <span class="nikname">김의중</span> {{elem.release_date|date:"H:i
+              D d M"}}
             </div>
 
             <button class="translate">See the translation</button>
@@ -80,13 +98,12 @@
                 <div class="favorite__count">{{elem.num_of_like}}</div>
               </div>
             </a>
-
           </div>
         </div>
       </li>
-    {% endfor %}
+      {% endfor %}
     </ul>
 
-    <!-- <script src="{% static 'threesam.js' %}"></script> -->
+    <script src="{% static 'threesam.js' %}"></script>
   </body>
 </html>

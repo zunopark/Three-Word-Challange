@@ -13,4 +13,8 @@ urlpatterns = [
     path('readbydate', views.read_posts_by_date, name="readbydate"),
     path('heart/<int:pk>', views.raise_heart, name="heart"),
 
+
+    path('rank', views.rank, name="rank"),
+    path('list', views.list, name="list")
+
 ]
