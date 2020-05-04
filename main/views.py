@@ -23,7 +23,7 @@ def list(request):
 banned_word = ['섹스', 'fuck']
 
 #한글 이름 만들기
-korean_name = ['이지은', '김하늘', '홍길동', '김철수철수', '한민지']
+korean_name = ['이지은', '김하늘', '홍길동', '김철수철수', '한민지', '김태형', '도경수', '오로지', '이기고']
 
 def generate_name(korean_name):
     return random.choice(korean_name)
@@ -113,6 +113,8 @@ def create_post(request):
             post.third = request.POST.get("third")
             post.nation_name = request.POST.get("nation")
 
+            n = Nation.objects.get(name=post.nation_name)
+            post.nation = n
             post.nickname = my_first_name
 
             #단어 예외 처리
@@ -176,7 +178,7 @@ def read_posts_by_date(request):
         'keywords' : today_keyword,
     }
 
-    return render(request, 'index.html', context)
+    return render(request, 'recent.html', context)
 
 # 제시어에 따라서 좋아요 순으로 정렬
 def read_posts_by_like(request):

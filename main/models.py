@@ -27,44 +27,14 @@ class Keyword(models.Model):
 # 나라별 검색 및 총 좋아요 랭킹 구현 위해서.
 class Nation(models.Model):
     nation_list = (
-        ('Afghanistan', '아프가니스탄'),
-        ('Albania', '알바니아'),
-        ('Algeria', '알제리아'),
-        ('Andorra', '안도라'),
-        ('Angola', '앙골라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
-        ('Andorra', '안도라'),
+        # ('Afghanistan', '아프가니스탄'),
+        # ('Albania', '알바니아'),
+        # ('Algeria', '알제리아'),
+        # ('Andorra', '안도라'),
+        # ('Angola', '앙골라'),
+        ('South Korea', '한국'),
+        ('Japan', '일본'),
+        ('China', '중국'),
     )
 # Antigua and Barbuda
 # Argentina
@@ -275,7 +245,7 @@ class Nation(models.Model):
 class Post(models.Model):
     objects = models.Manager()
     keyword = models.ForeignKey(Keyword, on_delete=models.CASCADE)
-    # nation = models.ForeignKey(Nation, on_delete=models.CASCADE)
+    nation = models.ForeignKey(Nation, on_delete=models.CASCADE)
 
     nation_name = models.CharField(max_length=100, null=False)
 

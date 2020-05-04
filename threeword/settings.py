@@ -12,7 +12,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '0vj=kgg2j_4w98tt45hd=!b$&k1_@mkc0d#sos2eq%@567)lk$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+# 배포하면 디버그 꺼야한다. 
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -114,7 +116,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-) 
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 MESSAGE_LEVEL = messages_constants.DEBUG
