@@ -17,6 +17,8 @@ urlpatterns = [
 
 
     path('rank', views.rank, name="rank"),
-    path('list', views.list, name="list")
+    path('list', views.list, name="list"),
+
+    path('other_prompt/<int:pk>', views.other_prompt, name="other_prompt")
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

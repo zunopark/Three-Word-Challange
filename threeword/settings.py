@@ -14,7 +14,8 @@ SECRET_KEY = '0vj=kgg2j_4w98tt45hd=!b$&k1_@mkc0d#sos2eq%@567)lk$'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 # 배포하면 디버그 꺼야한다. 
-DEBUG = False
+# 개발환경에서는 다시 켜 놓아야 스태틱 적용된다.
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 

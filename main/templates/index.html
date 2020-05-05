@@ -47,12 +47,15 @@
           {{keywords.translation}} | {{keywords.pronunciation}}
         </h4>
       </div>
+
+      {% if keywords.is_show %}
       <button class="write__button">
         <a href="{% url 'go_create' %}">
           <div class="fas fa-pen"></div>
           <div class="write">Write Three Words!</div>
         </a>
       </button>
+      {%endif%}
 
       <div class="menu">
         <div class="selected">

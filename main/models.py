@@ -20,6 +20,12 @@ class Keyword(models.Model):
     # 제시어 제출 날짜
     release_date = models.DateTimeField()
 
+    # 1,2,3 위의 국가
+    first_nation = models.CharField(max_length=50)
+    second_nation = models.CharField(max_length=50)
+    third_nation = models.CharField(max_length=50)
+
+
     def __str__(self):
         return self.name
 

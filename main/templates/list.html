@@ -45,24 +45,14 @@
       <li class="third__li">3rd</li>
     </ul>
     <ul class="content__grid">
-      <li class="date__li">04.30</li>
-      <li class="prompt__li">아이유</li>
-      <li class="count__li">14</li>
-      <li class="first__li">🇮🇹</li>
-      <li class="second__li">🇰🇷</li>
-      <li class="third__li">🇺🇲</li>
-      <li class="date__li">04.29</li>
-      <li class="prompt__li">이순신</li>
-      <li class="count__li">17</li>
-      <li class="first__li">🇺🇲</li>
-      <li class="second__li">🇰🇷</li>
-      <li class="third__li">🇮🇹</li>
-      <li class="date__li">04.28</li>
-      <li class="prompt__li">버거킹</li>
-      <li class="count__li">20</li>
-      <li class="first__li">🇰🇷</li>
-      <li class="second__li">🇮🇹</li>
-      <li class="third__li">🇺🇲</li>
+      {% for elem in keywords %}
+        <li class="date__li">{{elem.release_date|date:"M d"}}</li>
+        <li class="prompt__li"><a href="{% url 'other_prompt' elem.id %}">{{elem.name}}</a></li>
+        <li class="count__li">{{elem.sum_of_like}}</li>
+        <li class="first__li">{{elem.first_nation}}</li>
+        <li class="second__li">{{elem.second_nation}}</li>
+        <li class="third__li">{{elem.third_nation}}</li>
+      {%endfor%}
     </ul>
 
     <!-- <script src="list.js"></script> -->

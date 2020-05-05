@@ -12,18 +12,93 @@ current_pk = 0
 my_first_name = ""
 
 
-## 용섭 작업 위해서
 def rank(request):
-    return render(request, 'rank.html')
+    update_rank()
+    all_nation = Nation.objects.all().order_by('-sum_of_like')
+
+    length = [i for i in range(1, len(all_nation)+1)]
+
+    context = {
+        'nations' : all_nation,
+        'length' : length
+    }
+
+    return render(request, 'rank.html', context)
+
+def update_rank():
+    all_posts = Post.objects.all()
+
+    all_nation = Nation.objects.all()
+
+    for elem in all_nation:
+        _sum = 0
+        for posts in all_posts:
+            if posts.nation_name == elem.name:
+                _sum += posts.num_of_like
+        
+        elem.sum_of_like = _sum
+        elem.save()
+
 
 def list(request):
-    return render(request, 'list.html')
+    global current_keyword
+    today_keyword = Keyword.objects.get(name=current_keyword)
+    today_keyword.is_show = False
+
+    keywords = Keyword.objects.all().order_by('-release_date')
+
+    update_list_rank()
+
+    context = {
+        'keywords' : keywords
+    }
+
+    return render(request, 'list.html', context)
+
+def update_list_rank():
+    all_keywords = Keyword.objects.all()
+    
+    for elem in all_keywords:
+        posts = Post.objects.all().filter(keyword=elem).order_by('-num_of_like')[:3]
+        elem.first_nation = posts[0].nation_name
+        elem.second_nation = posts[1].nation_name
+        elem.third_nation = posts[2].nation_name
+        elem.save()
+
+
+def other_prompt(request, pk):
+    global current_keyword
+    global current_pk
+
+    today_keyword = Keyword.objects.get(pk=pk)
+    today_keyword.is_show = True
+
+    current_keyword = today_keyword.name
+    current_pk = today_keyword.id
+
+    posts = Post.objects.all().filter(keyword=today_keyword)
+    posts = posts.order_by('-num_of_like')
+
+    first = today_keyword.name[0]
+    second = today_keyword.name[1]
+    third = today_keyword.name[2]
+
+    context = {
+        'key' : current_keyword,
+        'posts' : posts,
+        'first' : first,
+        'second' : second,
+        'third' : third,
+        'keywords' : today_keyword,
+    }
+
+    return render(request, 'index.html', context)
 
 # 아직 미완성
 banned_word = ['섹스', 'fuck']
 
 #한글 이름 만들기
-korean_name = ['이지은', '김하늘', '홍길동', '김철수철수', '한민지', '김태형', '도경수', '오로지', '이기고']
+korean_name = ['이지은', '김하늘', '홍길동', '김철수', '한민지', '김태형', '도경수', '오로지', '이기고']
 
 def generate_name(korean_name):
     return random.choice(korean_name)
@@ -32,7 +107,7 @@ def home(request):
     global current_keyword
     global current_pk
 
-    # 제시어 중에서 표시하고 싶은것 하나만 뽑아야 한다. 
+    # 제시어 중에서 is_show == True인 것 하나를 반환
     today_keyword = Keyword.objects.get(is_show=True)
     current_keyword = today_keyword.name
     current_pk = today_keyword.id
@@ -133,16 +208,6 @@ def create_post(request):
     else:
         form = PostForm()
 
-
-# 날짜 순으로 제시어 나열해야 한다.
-def read_keyword_by_like(request):
-    keywords = Keyword.objects.all().order_by('-release_date')
-
-    context = {
-        'keywords' : keywords
-    }
-
-    return render(request, 'index.html', context)
 
 def raise_heart(request, pk):
     post = get_object_or_404(Post, pk=pk)

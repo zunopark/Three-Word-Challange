@@ -1,0 +1,50 @@
+/* navigation css */
+
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
+.nav {
+  top: 0px;
+  width: 100%;
+  animation: navAnim 0.3s linear forwards;
+}
+
+.nav .nav__list {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0;
+  background: linear-gradient(to right, #232526, #414345);
+  border-bottom: 0.3px solid gray;
+}
+
+.nav .nav__list__black {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0;
+  background-color: black;
+  border-bottom: 0.3px solid gray;
+}
+
+.nav__column i {
+  font-size: 24px;
+  color: #666666;
+}
+
+.nav__column .nav__selected {
+  color: #fcbf1e;
+}
+
+@keyframes navAnim {
+  0% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+
+  100% {
+    transform: none;
+  }
+}

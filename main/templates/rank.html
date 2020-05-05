@@ -39,32 +39,14 @@
       Ranking by country
     </div>
     <ul class="menu__grid">
-      <li class="date__li">Date</li>
-      <li class="prompt__li">Prompt</li>
-      <li class="count__li">Count</li>
-      <li class="first__li">1st</li>
-      <li class="second__li">2nd</li>
-      <li class="third__li">3rd</li>
+      {% for elem in length %}
+      <li class="first__li">{{elem}}st</li>
+      {% endfor %}
     </ul>
     <ul class="content__grid">
-      <li class="date__li">04.30</li>
-      <li class="prompt__li">아이유</li>
-      <li class="count__li">14</li>
-      <li class="first__li">🇮🇹</li>
-      <li class="second__li">🇰🇷</li>
-      <li class="third__li">🇺🇲</li>
-      <li class="date__li">04.29</li>
-      <li class="prompt__li">이순신</li>
-      <li class="count__li">17</li>
-      <li class="first__li">🇺🇲</li>
-      <li class="second__li">🇰🇷</li>
-      <li class="third__li">🇮🇹</li>
-      <li class="date__li">04.28</li>
-      <li class="prompt__li">버거킹</li>
-      <li class="count__li">20</li>
-      <li class="first__li">🇰🇷</li>
-      <li class="second__li">🇮🇹</li>
-      <li class="third__li">🇺🇲</li>
+      {% for elem in nations %}
+      <li class="first__li">{{elem.name}} | {{elem.sum_of_like}}</li>
+      {% endfor %}
     </ul>
 
     <!-- <script src="list.js"></script> -->
