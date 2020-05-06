@@ -135,12 +135,32 @@
                     document.querySelector(`#tr-2-${postId}`).innerText = response.data.tr2;
                     document.querySelector(`#tr-3-${postId}`).innerText = response.data.tr3;
                     document.querySelector(`#tr-button-${postId}`).innerText = "Back";
+
+                    axios({
+                    method: 'post',
+                    url: `/update_bool/${postId}/`,
+                    data: {
+                      temp: 'true',
+                    }
+                  }).then(function(response){
+                    console.log(response);
+                  });
                   }
                   else{
                     document.querySelector(`#tr-1-${postId}`).innerText = "";
                     document.querySelector(`#tr-2-${postId}`).innerText = "";
                     document.querySelector(`#tr-3-${postId}`).innerText = "";
                     document.querySelector(`#tr-button-${postId}`).innerText = "See the translation";
+                    
+                    axios({
+                    method: 'post',
+                    url: `/update_bool/${postId}/`,
+                    data: {
+                      temp: 'true',
+                    }
+                  }).then(function(response){
+                    console.log(response);
+                  });
                   }
                 })
                 .catch(function(error){

@@ -7,12 +7,26 @@ import random
 from django.contrib import messages
 
 from django.http import JsonResponse
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 
 current_keyword = ""
 current_pk = 0
 my_first_name = ""
+
+@csrf_exempt
+def update_bool(request, pk):
+    message = 'update successful'
+    if request.method == 'POST':
+        post = Post.objects.get(pk=pk)
+        if post.is_trans == True:
+            post.is_trans = False
+        else:
+            post.is_trans = True
+        post.save()
+    return HttpResponse(message)
 
 def translate(request, pk):
     post = get_object_or_404(Post, id=pk)

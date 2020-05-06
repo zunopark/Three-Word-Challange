@@ -5,6 +5,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="{% static 'style.css'%}" />
 
     <link
@@ -47,12 +48,15 @@
           {{keywords.translation}} | {{keywords.pronunciation}}
         </h4>
       </div>
+
+      {% if keywords.is_show %}
       <button class="write__button">
         <a href="{% url 'go_create' %}">
           <div class="fas fa-pen"></div>
           <div class="write">Write Three Words!</div>
         </a>
       </button>
+      {%endif%}
 
       <div class="menu">
         <div class="unselected">
@@ -70,27 +74,36 @@
         <div class="content__box__column">
           <div class="content__clock">
             <div class="clock__left">
+              
               <span class="nation"><img src="{{elem.nation.image.url}}"/></span>
               <!-- <span class="nation">{{elem.nation_name}}</span> -->
               <span class="nikname">{{elem.nickname}}</span>
               {{elem.release_date|date:"H:i"}}
             </div>
 
-            <button class="translate">See the translation</button>
+            <button class="translate" data-id="{{elem.id}}" id="tr-button-{{elem.id}}">See the translation</button>
+
+
           </div>
           <div class="content__wrap">
             <div class="content__text">
               <div class="content__text__column">
                 <span class="content__prompt">{{first}}</span>
                 <span class="first">{{elem.first}}</span>
+                <br>
+                <span class="first__tr" id="tr-1-{{elem.id}}"></span>
               </div>
               <div class="content__text__column">
                 <span class="content__prompt">{{second}}</span>
                 <span class="second">{{elem.second}}</span>
+                <br>
+                <span class="second__tr" id="tr-2-{{elem.id}}"></span>
               </div>
               <div class="content__text__column">
                 <span class="content__prompt">{{third}}</span>
                 <span class="third">{{elem.third}}</span>
+                <br>
+                <span class="third__tr" id="tr-3-{{elem.id}}"></span>
               </div>
             </div>
 
@@ -107,5 +120,56 @@
     </ul>
 
     <script src="{% static 'threesam.js' %}"></script>
+    <script>
+      const togglebuttons = document.querySelectorAll('.translate');
+
+      togglebuttons.forEach(function(button){
+          button.addEventListener('click', function(event){
+            const postId = event.target.dataset.id
+
+            axios.get(`/posts/${postId}/`)
+            		.then(function(response){
+
+                  if(!(response.data.is_clicked)){
+                    document.querySelector(`#tr-1-${postId}`).innerText = response.data.tr1;
+                    document.querySelector(`#tr-2-${postId}`).innerText = response.data.tr2;
+                    document.querySelector(`#tr-3-${postId}`).innerText = response.data.tr3;
+                    document.querySelector(`#tr-button-${postId}`).innerText = "Back";
+
+                    axios({
+                    method: 'post',
+                    url: `/update_bool/${postId}/`,
+                    data: {
+                      temp: 'true',
+                    }
+                  }).then(function(response){
+                    console.log(response);
+                  });
+                  }
+                  else{
+                    document.querySelector(`#tr-1-${postId}`).innerText = "";
+                    document.querySelector(`#tr-2-${postId}`).innerText = "";
+                    document.querySelector(`#tr-3-${postId}`).innerText = "";
+                    document.querySelector(`#tr-button-${postId}`).innerText = "See the translation";
+                    
+                    axios({
+                    method: 'post',
+                    url: `/update_bool/${postId}/`,
+                    data: {
+                      temp: 'true',
+                    }
+                  }).then(function(response){
+                    console.log(response);
+                  });
+                  }
+                })
+                .catch(function(error){
+                  console.log(error);
+                })
+          });
+      });
+
+
+    </script>
   </body>
 </html>
