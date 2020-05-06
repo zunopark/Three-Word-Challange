@@ -35,20 +35,17 @@
         </li>
       </ul>
     </nav>
-    <div class="pre__title">
-      Ranking by country
-    </div>
-    <ul class="menu__grid">
-      {% for elem in length %}
-      <li class="first__li">{{elem}}st</li>
-      {% endfor %}
-    </ul>
-    <ul class="content__grid">
+
+    <div class="pre__title">Ranking by country</div>
+    <ul class="ranking">
       {% for elem in nations %}
-      <li class="first__li">{{elem.name}} | {{elem.sum_of_like}}</li>
+      <li class="nation">
+        <div class="rank__nation">{{elem.name}}</div>
+        <div class="like">total like: {{elem.sum_of_like}}</div>
+        <div class="total">total post: {{elem.total_post}}</div>
+      </li>
       {% endfor %}
     </ul>
 
-    <!-- <script src="list.js"></script> -->
   </body>
 </html>

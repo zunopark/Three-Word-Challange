@@ -35,11 +35,11 @@
         </li>
       </ul>
     </nav>
+
     <div class="pre__title">Previous Prompt</div>
     <ul class="menu__grid">
       <li class="date__li">Date</li>
-      <li class="prompt__li">Prompt</li>
-      <li class="count__li">Count</li>
+      <li class="prompt__li">Prompt (#)</li>
       <li class="first__li">1st</li>
       <li class="second__li">2nd</li>
       <li class="third__li">3rd</li>
@@ -47,11 +47,13 @@
     <ul class="content__grid">
       {% for elem in keywords %}
         <li class="date__li">{{elem.release_date|date:"M d"}}</li>
-        <li class="prompt__li"><a href="{% url 'other_prompt' elem.id %}">{{elem.name}}</a></li>
-        <li class="count__li">{{elem.sum_of_like}}</li>
-        <li class="first__li">{{elem.first_nation}}</li>
-        <li class="second__li">{{elem.second_nation}}</li>
-        <li class="third__li">{{elem.third_nation}}</li>
+        <li class="prompt__li"><a href="{% url 'other_prompt' elem.id %}">{{elem.name}}</a> ({{elem.sum_of_like}})</li>
+        <li class="first__li"><span class="nation"><img src="{{elem.first_nation.image.url}}"/></span></li>
+        <li class="second__li"><span class="nation"><img src="{{elem.second_nation.image.url}}"/></span></li>
+        <li class="third__li"><span class="nation"><img src="{{elem.third_nation.image.url}}"/></span></li>
+        <br>
+
+
       {%endfor%}
     </ul>
 

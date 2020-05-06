@@ -6,11 +6,31 @@ from .forms import PostForm
 import random
 from django.contrib import messages
 
+from django.http import JsonResponse
+
+
 
 current_keyword = ""
 current_pk = 0
 my_first_name = ""
 
+def translate(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    
+    tr1 = post.trans_1
+    tr2 = post.trans_2
+    tr3 = post.trans_3
+
+    is_clicked = post.is_trans
+
+    context = {
+        'tr1' : tr1,
+        'tr2' : tr2,
+        'tr3' : tr3,
+        'is_clicked':is_clicked
+    }
+
+    return JsonResponse(context)
 
 def rank(request):
     update_rank()
@@ -36,6 +56,9 @@ def update_rank():
             if posts.nation_name == elem.name:
                 _sum += posts.num_of_like
         
+        total_post = Post.objects.all().filter(nation=elem)
+
+        elem.total_post = len(total_post)
         elem.sum_of_like = _sum
         elem.save()
 
@@ -60,9 +83,11 @@ def update_list_rank():
     
     for elem in all_keywords:
         posts = Post.objects.all().filter(keyword=elem).order_by('-num_of_like')[:3]
-        elem.first_nation = posts[0].nation_name
-        elem.second_nation = posts[1].nation_name
-        elem.third_nation = posts[2].nation_name
+        p = Post.objects.all().filter(keyword=elem)
+        elem.sum_of_like = len(p)
+        elem.first_nation = posts[0].nation
+        elem.second_nation = posts[1].nation
+        elem.third_nation = posts[2].nation
         elem.save()
 
 

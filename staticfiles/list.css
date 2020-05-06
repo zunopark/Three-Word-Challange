@@ -13,7 +13,6 @@
   text-align: center;
   display: grid;
   gap: 10px;
-  grid-template-columns: 80px 120px 60px 40px 40px 40px;
   justify-content: center;
   align-items: center;
 }
@@ -23,12 +22,11 @@
   padding-top: 10px;
   display: grid;
   gap: 10px;
-  grid-template-columns: 80px 120px 60px 40px 40px 40px;
   grid-auto-rows: 30px;
+  align-items: center;
 }
 
 .content__grid li {
-  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;

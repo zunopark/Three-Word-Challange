@@ -1,32 +1,10 @@
-// const best = document.querySelector(`.selected`);
-// const recent = document.querySelector(`.unselected`);
 
 const favorite = document.querySelectorAll(`.favorite`);
 const heart = document.querySelectorAll(`.fa-heart`);
 const scroll = document.querySelectorAll(".scroll");
 
-// const SELECTED = `selected`;
-// const UNSELECTED = `unselected`;
-
-const promptSelected = `selected__prompt`;
 
 let isHeartClicked = false;
-
-// function handleBest(event) {
-//   if (best.classList === SELECTED) {
-//     best.classList = UNSELECTED;
-//   } else {
-//     NodeList.classList = SELECTED;
-//   }
-// }
-
-// function handleMenuNew(event) {
-//   if (newList.classList === SELECTED) {
-//   } else {
-//     newList.classList = SELECTED;
-//     bestList.classList = UNSELECTED;
-//   }
-// }
 
 function handleHeart(event) {
   event.toElement.classList.add(`color__yellow`);
@@ -60,9 +38,8 @@ function scrollAppear(event) {
   });
 }
 
+
 function init() {
-  // best.addEventListener("click", handleBest);
-  // recent.addEventListener("click", handleRecent);
 
   heart.forEach(function (elem) {
     elem.addEventListener("click", handleHeart);
@@ -73,6 +50,7 @@ function init() {
   });
 
   window.scrollTo(1, 1);
+
 }
 
 init();
