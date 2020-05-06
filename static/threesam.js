@@ -1,5 +1,3 @@
-
-const favorite = document.querySelectorAll(`.favorite`);
 const heart = document.querySelectorAll(`.fa-heart`);
 const scroll = document.querySelectorAll(".scroll");
 

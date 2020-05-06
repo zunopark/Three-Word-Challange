@@ -60,7 +60,7 @@
 
       <div class="menu">
         <div class="unselected">
-          <a href="{% url 'readbylike' %}"><span>Popularity</span></a>
+          <a href="{% url 'readbylike' %}"><span id="nocolor">Popularity</span></a>
         </div>
         <div class="selected">
           <a href="{% url 'readbydate' %}"><span>Recent</span></a>
@@ -75,7 +75,7 @@
           <div class="content__clock">
             <div class="clock__left">
               
-              <span class="nation"><img src="{{elem.nation.image.url}}"/></span>
+              <span class="nation"><img src="{{elem.nation.image.url}}" id="flag"/></span>
               <!-- <span class="nation">{{elem.nation_name}}</span> -->
               <span class="nikname">{{elem.nickname}}</span>
               {{elem.release_date|date:"H:i"}}

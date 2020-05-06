@@ -11,6 +11,11 @@
   font-weight: 300;
 }
 
+
+#nocolor{
+  color: #5e5f60;
+}
+
 a {
   text-decoration-line: none;
 }
@@ -261,6 +266,11 @@ a:link {
 .nation {
   font-size: 40px;
   padding-top: 10px;
+}
+
+#flag{
+  width: 32px;
+  height: 32px;
 }
 
 .nikname {
