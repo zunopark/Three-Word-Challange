@@ -119,8 +119,6 @@ class Nation(models.Model):
         ('Mongolia', '몽골'),
         ('Montenegro', '몬테네그로'),
         ('Morocco', '모로코'),
-        
-
 
 
     )
