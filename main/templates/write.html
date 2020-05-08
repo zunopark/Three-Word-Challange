@@ -55,9 +55,13 @@
           placeholder="English translation(options)"
         />
       </p> -->
-      <div class="prompt__info">
-        Your first Korean nickname is "{{my_first_name}}"
-      </div>
+
+      
+      <p class="write__text__column">
+        <span class="write__prompt">Your Korean Name</span>
+        <input class="korean" name="nickname" id="nickname" placeholder="Korean Name" />
+      </p>
+
       <select name="nation" id="nation">
         <option value="">What is your country?</option>
         {% for elem in nation %}

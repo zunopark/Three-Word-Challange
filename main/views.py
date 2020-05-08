@@ -5,16 +5,12 @@ import datetime
 from .forms import PostForm
 import random
 from django.contrib import messages
-
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-
-
 current_keyword = ""
 current_pk = 0
-my_first_name = ""
 
 @csrf_exempt
 def update_bool(request, pk):
@@ -134,13 +130,7 @@ def other_prompt(request, pk):
     return render(request, 'index.html', context)
 
 # 아직 미완성
-banned_word = ['섹스', 'fuck']
-
-#한글 이름 만들기
-korean_name = ['이지은', '김하늘', '홍길동', '김철수', '한민지', '김태형', '도경수', '오로지', '이기고']
-
-def generate_name(korean_name):
-    return random.choice(korean_name)
+banned_word = ['섹스', 'fuck', '색스', 'Fuck', '시발', '씨발', 'Sex', 'SEX']
 
 def home(request):
     global current_keyword
@@ -180,9 +170,7 @@ def home(request):
 def go_create(request):
     global current_keyword
     global current_pk
-    global my_first_name
 
-    my_first_name = generate_name(korean_name)
 
     first = current_keyword[0]
     second = current_keyword[1]
@@ -201,13 +189,13 @@ def go_create(request):
         'third' : third,
         'exp' : exp,
         'nation' : nation,
-        'my_first_name' : my_first_name,
     }
+
     return render(request, 'write.html', context)
 
 def check_word(post):
     for elem in banned_word:
-        if elem in post.first or elem in post.second or elem in post.third:
+        if elem in post.first or elem in post.second or elem in post.third or elem in post.nickname:
             return True
     
     return False
@@ -226,14 +214,18 @@ def create_post(request):
             post.second = request.POST.get("second")
             post.third = request.POST.get("third")
             post.nation_name = request.POST.get("nation")
+            post.nickname = request.POST.get("nickname")
 
-            n = Nation.objects.get(name=post.nation_name)
-            post.nation = n
-            post.nickname = my_first_name
+            try:
+                n = Nation.objects.get(name=post.nation_name)
+                post.nation = n
+            except:
+                messages.add_message(request, messages.WARNING, 'Please Fill in all Required Fields')
+                return redirect('go_create')
 
             #단어 예외 처리
             if check_word(post):
-                messages.add_message(request, messages.WARNING, '올바른 단어를 사용하자!')
+                messages.add_message(request, messages.WARNING, 'Please do not use the bad words!')
                 return redirect('go_create')
 
             post.keyword = key
@@ -241,7 +233,7 @@ def create_post(request):
             return redirect('readbylike')
         else:
             print('not valid')
-            messages.add_message(request, messages.WARNING, '빈칸을 다 채워주세요!')
+            messages.add_message(request, messages.WARNING, 'Please Fill in all Required Fields!')
             return redirect('go_create')
             
     else:
