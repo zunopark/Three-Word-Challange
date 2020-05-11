@@ -119,90 +119,87 @@ class Nation(models.Model):
         ('Mongolia', '몽골'),
         ('Montenegro', '몬테네그로'),
         ('Morocco', '모로코'),
-
-
+        ('Mozambique', '모잠비크'),
+        ('Myanmar', '마이안마르'),
+        ('Namibia', '나미비아'),
+        ('Nauru', '나우루'),
+        ('Nepal', '네팔'),
+        ('Netherlands', '네덜란드'),
+        ('New Zealand', '뉴질랜드'),
+        ('Nicaragua', '니카라구아'),
+        ('Niger', '니게르'),
+        ('Nigeria', '나이지리아'),
+        ('North Korea', '북한'),
+        ('North Macedonia', '북마케도니아'),
+        ('Norway', '노르웨이'),
+        ('Oman', '오만'),
+        ('Pakistan', '파키스탄'),
+        ('Palau', '팔라우'),
+        ('Palestine', '팔레스타인'),
+        ('Panama', '파나마'),
+        ('Papua New Guinea', '파푸아 뉴기니'),
+        ('Paraguay', '파라과이'),
+        ('Peru', '페루'),
+        ('Philippines', '필리핀'),
+        ('Poland', '폴란드'),
+        ('Portugal', '포르투갈'),
+        ('Qatar', '카타르'),
+        ('Romania', '루마니아'),
+        ('Russia', '러시아'),
+        ('Rwanda', '르완다'),
+        ('Saint Kitts and Nevis', 'Saint Kitts and Nevis'),
+        ('Saint Lucia', '세인트 루시아'),
+        ('Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines'),
+        ('Samoa', '사모아'),
+        ('San Marino', '산 마리노'),
+        ('Sao Tome and Principe', 'Sao Tome and Principe'),
+        ('Saudi Arabia', '사우디 아라비아'),
+        ('Senegal', '세네갈'),
+        ('Serbia', '세르비아'),
+        ('Seychelles', 'Seychelles'),
+        ('Sierra Leone', 'Sierra Leone'),
+        ('Singapore', '싱가포르'),
+        ('Slovakia', '슬로바키아'),
+        ('Slovenia', '슬로베니아'),
+        ('Solomon Islands', '솔로몬 섬'),
+        ('Somalia', '소말리아'),
+        ('South Africa', '남아프리카'),
+        ('South Korea', '한국'),
+        ('South Sudan', '남수단'),
+        ('Spain', '스페인'),
+        ('Sri Lanka', '스리랑카'),
+        ('Sudan', '수단'),
+        ('Suriname', '수리남'),
+        ('Sweden', '스웨덴'),
+        ('Switzerland', '스위스랜드'),
+        ('Syria', '시리아'),
+        ('Taiwan', '대만'),
+        ('Tajikistan', '타지키스탄'),
+        ('Tanzania', '탄자니아'),
+        ('Thailand', '태국'),
+        ('Timor-Leste', '티모르 레스트'),
+        ('Togo', '토고'),
+        ('Tonga', '통가'),
+        ('Trinidad and Tobago', '트리니다드 토바고'),
+        ('Tunisia', '튀니시아'),
+        ('Turkey', '터키'),
+        ('Turkmenistan', '투르크메니스탄'),
+        ('Tuvalu', '투발루'),
+        ('Uganda', '우간다'),
+        ('Ukraine', '우크라이나'),
+        ('United Arab Emirates (UAE)', '아랍에미리트'),
+        ('United Kingdom (UK)', '영국'),
+        ('United States of America', '미국'),
+        ('Uruguay', '우루과이'),
+        ('Uzbekistan', '우즈베키스탄'),
+        ('Vanuatu', '바누아투'),
+        ('Vatican City', '바티칸'),
+        ('Venezuela', '베네수엘라'),
+        ('Vietnam', '베트남'),
+        ('Yemen', '예맨'),
+        ('Zambia', '잠비아'),
+        ('Zimbabwe', '짐바브웨')
     )
-
-# Mozambique
-# Myanmar
-# Namibia
-# Nauru
-# Nepal
-# Netherlands
-# New Zealand
-# Nicaragua
-# Niger
-# Nigeria
-# North Korea
-# North Macedonia (formerly Macedonia)
-# Norway
-# Oman
-# Pakistan
-# Palau
-# Palestine
-# Panama
-# Papua New Guinea
-# Paraguay
-# Peru
-# Philippines
-# Poland
-# Portugal
-# Qatar
-# Romania
-# Russia
-# Rwanda
-# Saint Kitts and Nevis
-# Saint Lucia
-# Saint Vincent and the Grenadines
-# Samoa
-# San Marino
-# Sao Tome and Principe
-# Saudi Arabia
-# Senegal
-# Serbia
-# Seychelles
-# Sierra Leone
-# Singapore
-# Slovakia
-# Slovenia
-# Solomon Islands
-# Somalia
-# South Africa
-# South Korea
-# South Sudan
-# Spain
-# Sri Lanka
-# Sudan
-# Suriname
-# Sweden
-# Switzerland
-# Syria
-# Taiwan
-# Tajikistan
-# Tanzania
-# Thailand
-# Timor-Leste
-# Togo
-# Tonga
-# Trinidad and Tobago
-# Tunisia
-# Turkey
-# Turkmenistan
-# Tuvalu
-# Uganda
-# Ukraine
-# United Arab Emirates (UAE)
-# United Kingdom (UK)
-# United States of America (USA)
-# Uruguay
-# Uzbekistan
-# Vanuatu
-# Vatican City (Holy See)
-# Venezuela
-# Vietnam
-# Yemen
-# Zambia
-# Zimbabwe
 
     objects = models.Manager()
     name = models.CharField(max_length=100, choices=nation_list)

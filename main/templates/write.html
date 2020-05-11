@@ -56,10 +56,8 @@
         />
       </p> -->
 
-      
-      <p class="write__text__column">
-        <span class="write__prompt">Your Korean Name</span>
-        <input class="korean" name="nickname" id="nickname" placeholder="Korean Name" />
+      <p class="write__name__column">
+        <input class="name" name="nickname" id="nickname" placeholder="Your Name?" />
       </p>
 
       <select name="nation" id="nation">
@@ -68,6 +66,10 @@
         <option value="{{elem.name}}">{{elem.name}}</option>
         {%endfor%}
       </select>
+
+
+
+
       <p>
         <input type="submit" value="Share My Three Words!" class="submit" />
       </p>
