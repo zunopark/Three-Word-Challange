@@ -18,6 +18,11 @@
   transition: all 0.4s;
 }
 
+.nation img{
+  width: 128px;
+  height: 128px;
+}
+
 .ranking li:hover {
   transform: scale(1.05);
 }
