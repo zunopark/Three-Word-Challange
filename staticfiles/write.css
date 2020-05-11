@@ -21,10 +21,10 @@
 }
 
 /* .write__text__column:nth-child(odd) {
-  display: flex;
-  align-items: center;
-  margin-top: 3px;
-} */
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+  } */
 
 .write__text__column .korean {
   width: 220px;
@@ -52,6 +52,30 @@
   font-weight: 300;
 }
 
+.write__name__column {
+  color: white;
+  margin: 15px 0;
+}
+
+.write__name__column .write__name,
+.name {
+  width: 250px;
+  font-size: 20px;
+  color: white;
+  font-family: inherit;
+  background: transparent;
+  border-radius: 10px;
+  outline: none;
+  text-align: center;
+  height: 40px;
+}
+
+.write__name__column .name::placeholder {
+  color: rgb(182, 182, 182);
+  text-align: center;
+  border: 1px solid transparent;
+}
+
 .submit {
   font-size: 20px;
   color: white;
@@ -69,23 +93,25 @@
 }
 
 form {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* .back {
-  font-size: 15px;
-  color: white;
-  background-color: gray;
-  margin-bottom: 20px;
-  border-radius: 20px;
-  padding: 5px 10px;
-  outline: none;
-  border: none;
-}
-
-.back:hover {
-  cursor: pointer;
-} */
+    font-size: 15px;
+    color: white;
+    background-color: gray;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding: 5px 10px;
+    outline: none;
+    border: none;
+  }
+  
+  .back:hover {
+    cursor: pointer;
+  } */
 
 .color__yellow {
   color: #fcbf1e;
@@ -97,11 +123,12 @@ form {
 }
 
 select {
-  width: 200px;
-  font-size: 15px;
-  color: white;
+  width: 250px;
+  height: 40px;
+  font-size: 20px;
+  color: rgb(182, 182, 182);
   font-family: inherit;
   background: transparent;
-  border-radius: 0px;
+  border-radius: 10px;
   outline: none;
 }
