@@ -9,8 +9,6 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-current_keyword = ""
-current_pk = 0
 
 @csrf_exempt
 def update_bool(request, pk):
@@ -74,9 +72,6 @@ def update_rank():
 
 
 def list(request):
-    global current_keyword
-    today_keyword = Keyword.objects.get(name=current_keyword)
-    today_keyword.is_show = False
 
     keywords = Keyword.objects.all().order_by('-release_date')
 
@@ -102,14 +97,13 @@ def update_list_rank():
 
 
 def other_prompt(request, pk):
-    global current_keyword
-    global current_pk
+    current_keyword = Keyword.objects.get(is_show=True)
+    current_keyword.is_show = False
+    current_keyword.save()
 
     today_keyword = Keyword.objects.get(pk=pk)
     today_keyword.is_show = True
-
-    current_keyword = today_keyword.name
-    current_pk = today_keyword.id
+    today_keyword.save()
 
     posts = Post.objects.all().filter(keyword=today_keyword)
     posts = posts.order_by('-num_of_like')
@@ -119,7 +113,7 @@ def other_prompt(request, pk):
     third = today_keyword.name[2]
 
     context = {
-        'key' : current_keyword,
+        'key' : today_keyword.name,
         'posts' : posts,
         'first' : first,
         'second' : second,
@@ -133,13 +127,9 @@ def other_prompt(request, pk):
 banned_word = ['섹스', 'fuck', '색스', 'Fuck', '시발', '씨발', 'Sex', 'SEX']
 
 def home(request):
-    global current_keyword
-    global current_pk
 
     # 제시어 중에서 is_show == True인 것 하나를 반환
     today_keyword = Keyword.objects.get(is_show=True)
-    current_keyword = today_keyword.name
-    current_pk = today_keyword.id
 
     # 랜덤으로 뽑고 싶으면 돌리는 로직
     # while True:
@@ -157,7 +147,7 @@ def home(request):
     third = today_keyword.name[2]
 
     context = {
-        'key' : current_keyword,
+        'key' : today_keyword.name,
         'posts' : posts,
         'first' : first,
         'second' : second,
@@ -168,27 +158,32 @@ def home(request):
     return render(request, 'index.html', context)
 
 def go_create(request):
-    global current_keyword
-    global current_pk
+    today_keyword = Keyword.objects.get(is_show=True)
 
 
-    first = current_keyword[0]
-    second = current_keyword[1]
-    third = current_keyword[2]
 
-    obj = Keyword.objects.get(pk=current_pk)
-    exp = obj.explanation
+    first = today_keyword.name[0]
+    second = today_keyword.name[1]
+    third = today_keyword.name[2]
+
+    exp = today_keyword.explanation
 
     # 애초부터 넣을때 알파벳 순으로 넣어야 한다.
     nation = Nation.objects.all()
 
+    test = []
+    for elem in nation:
+        test.append(elem.name)
+    test.sort()
+
     context = {
-        'keyword' : current_keyword,
+        'keyword' : today_keyword.name,
         'first' : first,
         'second' : second,
         'third' : third,
         'exp' : exp,
         'nation' : nation,
+        'test':test
     }
 
     return render(request, 'write.html', context)
@@ -202,8 +197,7 @@ def check_word(post):
 
 
 def create_post(request):
-    global current_pk
-    key = Keyword.objects.get(pk=current_pk)
+    key = Keyword.objects.get(is_show=True)
 
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -230,7 +224,7 @@ def create_post(request):
 
             post.keyword = key
             post.save()
-            return redirect('readbylike')
+            return redirect('readbydate')
         else:
             print('not valid')
             messages.add_message(request, messages.WARNING, 'Please Fill in all Required Fields!')
@@ -253,11 +247,7 @@ def raise_heart(request, pk):
 
 # 제시어에 따라서 최신 순으로 정렬
 def read_posts_by_date(request):
-    global current_pk
-    global current_keyword
-    key = Keyword.objects.get(pk=current_pk)
-
-    today_keyword = Keyword.objects.get(is_show=True)
+    key = Keyword.objects.get(is_show=True)
 
     posts = Post.objects.all().filter(keyword = key).order_by('-release_date')
 
@@ -267,27 +257,22 @@ def read_posts_by_date(request):
 
     context = {
         'posts':posts,
-        'key':current_keyword,
+        'key':key.name,
         'first':first,
         'second':second,
         'third':third,
-        'keywords' : today_keyword,
+        'keywords' : key,
     }
 
     return render(request, 'recent.html', context)
 
 # 제시어에 따라서 좋아요 순으로 정렬
 def read_posts_by_like(request):
-    global current_pk
-    global current_keyword
-    # 제시어 클릭시 pk 값 넘어옴
-    key = Keyword.objects.get(pk=current_pk)
+    key = Keyword.objects.get(is_show=True)
 
     first = key.name[0]
     second = key.name[1]
     third = key.name[2]
-
-    today_keyword = Keyword.objects.get(is_show=True)
 
 
     posts = Post.objects.all().order_by('-num_of_like')
@@ -295,11 +280,11 @@ def read_posts_by_like(request):
 
     context = {
         'posts':posts,
-        'key':current_keyword,
+        'key':key.name,
         'first':first,
         'second':second,
         'third':third,
-        'keywords' : today_keyword,
+        'keywords' : key,
     }
 
     return render(request, 'index.html', context)

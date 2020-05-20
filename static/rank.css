@@ -30,3 +30,10 @@
 .ranking div {
   background-color: rgba(0, 0, 0, 0.6);
 }
+
+.nation img{
+    width:64px;
+    height:64px;
+}
+
+

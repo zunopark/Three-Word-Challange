@@ -122,6 +122,12 @@ form {
   padding: 10px 0;
 }
 
+.prompt__info__box{
+    color:white;
+    padding:10px;
+    border: 2px solid lightblue;
+}
+
 select {
   width: 250px;
   height: 40px;

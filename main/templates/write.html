@@ -62,8 +62,8 @@
 
       <select name="nation" id="nation">
         <option value="">What is your country?</option>
-        {% for elem in nation %}
-        <option value="{{elem.name}}">{{elem.name}}</option>
+        {% for elem in test %}
+        <option value="{{elem}}">{{elem}}</option>
         {%endfor%}
       </select>
 
@@ -77,14 +77,22 @@
 
     <div class="prompt__info">{{exp}}</div>
 
-    <!-- <a href="{% url 'home' %}">
-      <button class="back">Back</button>
-    </a> -->
+    {% if messages %}
+    {% for message in messages %}
+        <span class="write__prompt">{{message.message}}</span>
+    {%endfor%}
+    {%endif%}
 
-    {% if messages %} {% for message in messages %}
-    <span class="write__prompt">{{message.tags}}</span>
-    <span class="write__prompt">{{message.message}}</span>
-    {% endfor %} {% endif %}
+    <div class="prompt__info__box">
+        "삼행시" is a Korean word challenge(or game) which can help learners to memorize words.<br>
+        The point of the game is to make sentences starting with each syllable of a given Korean word.<br>
+        There is no strict rule as long as it make sense.<br><br>
+        So play with the syllables and be creative!
+    </div>
+
+    <div class="prompt__info">exemple case</div>
+    <img src="{% static 'exemple.png' %}" class="exemple_image"/>
+
 
     <!-- <script src="write.js"></script> -->
   </body>
