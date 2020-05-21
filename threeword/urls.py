@@ -22,7 +22,8 @@ urlpatterns = [
     path('list', views.list, name="list"),
     path('update_bool/<int:pk>/', views.update_bool, name="update_bool"),
 
-    path('other_prompt/<int:pk>', views.other_prompt, name="other_prompt")
+    path('other_prompt/<int:pk>', views.other_prompt, name="other_prompt"),
+    path('rank/<int:pk>', views.nation_post, name="nation_post")
 
 ]
 

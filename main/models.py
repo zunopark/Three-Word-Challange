@@ -1,5 +1,9 @@
 from django.db import models
 
+class PageCounter(models.Model):
+    objects = models.Manager()
+    count = models.IntegerField(verbose_name="방문자수")
+
 
 # 나라별 검색 및 총 좋아요 랭킹
 class Nation(models.Model):
@@ -212,6 +216,9 @@ class Nation(models.Model):
 
     # 총 post 개수
     total_post = models.IntegerField(default=0)
+
+    # 총 포인트
+    nation_point = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

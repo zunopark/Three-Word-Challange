@@ -18,15 +18,32 @@
   transition: all 0.4s;
 }
 
+.nation img{
+  width: 128px;
+  height: 128px;
+}
+
 .ranking li:hover {
   transform: scale(1.05);
 }
 
 .like,
-.total {
+.total
+.point {
   font-size: 15px;
+}
+
+.point{
+  color:red;
 }
 
 .ranking div {
   background-color: rgba(0, 0, 0, 0.6);
 }
+
+.nation img{
+    width:64px;
+    height:64px;
+}
+
+

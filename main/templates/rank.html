@@ -36,14 +36,15 @@
       </ul>
     </nav>
 
-    <div class="pre__title">Rank by nation</div>
+    <div class="pre__title">Rank by Nation Point</div>
     <ul class="ranking">
       {% for elem in nations %}
       <li class="nation">
-        <img src="{{elem.image.url}}" alt="" />
+        <a href="{% url 'nation_post' elem.id %}"><img src="{{elem.image.url}}" alt="" /></a>
         <div class="rank__nation">{{elem.name}}</div>
         <div class="like">total like: {{elem.sum_of_like}}</div>
         <div class="total">total post: {{elem.total_post}}</div>
+        <div class="point">nation point: {{elem.nation_point}}</div>
       </li>
       {% endfor %}
     </ul>

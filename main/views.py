@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404, redirect
-from main.models import Keyword, Post, Nation
+from main.models import Keyword, Post, Nation, PageCounter
 from django.utils import timezone
 import datetime
 from .forms import PostForm
@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-
 
 @csrf_exempt
 def update_bool(request, pk):
@@ -42,7 +41,8 @@ def translate(request, pk):
 
 def rank(request):
     update_rank()
-    all_nation = Nation.objects.all().order_by('-sum_of_like')
+
+    all_nation= Nation.objects.all().exclude(sum_of_like=0).order_by('-nation_point')
 
     length = [i for i in range(1, len(all_nation)+1)]
 
@@ -68,6 +68,7 @@ def update_rank():
 
         elem.total_post = len(total_post)
         elem.sum_of_like = _sum
+        elem.nation_point = elem.total_post*100 + elem.sum_of_like
         elem.save()
 
 
@@ -112,6 +113,8 @@ def other_prompt(request, pk):
     second = today_keyword.name[1]
     third = today_keyword.name[2]
 
+    count = PageCounter.objects.all()[0]
+
     context = {
         'key' : today_keyword.name,
         'posts' : posts,
@@ -119,25 +122,22 @@ def other_prompt(request, pk):
         'second' : second,
         'third' : third,
         'keywords' : today_keyword,
+        'count' : count.count,
     }
 
     return render(request, 'index.html', context)
 
-# 아직 미완성
-banned_word = ['섹스', 'fuck', '색스', 'Fuck', '시발', '씨발', 'Sex', 'SEX']
+# 미완성
+banned_word = ['섹스', 'fuck', '색스', 'Fuck', '시발', '씨발', 'Sex', 'SEX', '미친', '병신', '똥']
 
 def home(request):
+    # 카운터
+    pgc = PageCounter.objects.all()[0]
+    pgc.count += 1
+    pgc.save()
 
     # 제시어 중에서 is_show == True인 것 하나를 반환
     today_keyword = Keyword.objects.get(is_show=True)
-
-    # 랜덤으로 뽑고 싶으면 돌리는 로직
-    # while True:
-    #     pick = random.choice(keywords)
-    #     if current_keyword != pick.name:
-    #         current_keyword = pick.name
-    #         current_pk = pick.id
-    #         break
     
     posts = Post.objects.all().filter(keyword=today_keyword)
     posts = posts.order_by('-num_of_like')
@@ -146,6 +146,9 @@ def home(request):
     second = today_keyword.name[1]
     third = today_keyword.name[2]
 
+    count = PageCounter.objects.all()[0]
+
+
     context = {
         'key' : today_keyword.name,
         'posts' : posts,
@@ -153,14 +156,13 @@ def home(request):
         'second' : second,
         'third' : third,
         'keywords' : today_keyword,
+        'count' : count.count,
     }
 
     return render(request, 'index.html', context)
 
 def go_create(request):
     today_keyword = Keyword.objects.get(is_show=True)
-
-
 
     first = today_keyword.name[0]
     second = today_keyword.name[1]
@@ -183,7 +185,7 @@ def go_create(request):
         'third' : third,
         'exp' : exp,
         'nation' : nation,
-        'test':test
+        'test': test
     }
 
     return render(request, 'write.html', context)
@@ -224,7 +226,7 @@ def create_post(request):
 
             post.keyword = key
             post.save()
-            return redirect('readbydate')
+            return redirect('readbylike')
         else:
             print('not valid')
             messages.add_message(request, messages.WARNING, 'Please Fill in all Required Fields!')
@@ -248,12 +250,13 @@ def raise_heart(request, pk):
 # 제시어에 따라서 최신 순으로 정렬
 def read_posts_by_date(request):
     key = Keyword.objects.get(is_show=True)
-
     posts = Post.objects.all().filter(keyword = key).order_by('-release_date')
 
     first = key.name[0]
     second = key.name[1]
     third = key.name[2]
+    
+    count = PageCounter.objects.all()[0]
 
     context = {
         'posts':posts,
@@ -262,6 +265,7 @@ def read_posts_by_date(request):
         'second':second,
         'third':third,
         'keywords' : key,
+        'count' : count.count,
     }
 
     return render(request, 'recent.html', context)
@@ -277,6 +281,8 @@ def read_posts_by_like(request):
 
     posts = Post.objects.all().order_by('-num_of_like')
     posts = posts.filter(keyword=key)
+    
+    count = PageCounter.objects.all()[0]
 
     context = {
         'posts':posts,
@@ -285,6 +291,27 @@ def read_posts_by_like(request):
         'second':second,
         'third':third,
         'keywords' : key,
+        'count' : count.count,
     }
 
     return render(request, 'index.html', context)
+
+
+def nation_post(request, pk):
+    nation = Nation.objects.get(pk=pk)
+    
+    # 게시물 가져오기
+    posts = Post.objects.all().filter(nation=nation).order_by('-num_of_like')
+
+    key = Keyword.objects.get(is_show=True)
+
+    counts = PageCounter.objects.all()[0]
+
+    context = {
+        'keyword' : key,
+        'nation' : nation,
+        'posts' : posts,
+        'counter' : counts.count,
+    }
+
+    return render(request, 'nation_post.html', context)

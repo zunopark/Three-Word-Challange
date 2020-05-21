@@ -15,7 +15,6 @@
       crossorigin="anonymous"
     />
 
-    <title>Korean Three Word Challenge</title>
   </head>
   <body>
     <nav class="nav">
@@ -38,34 +37,27 @@
       </ul>
     </nav>
     <div class="upper__content">
-      <div class="title">Everyday Korean Challenge</div>
+      <div class="title">Posts By Nation</div>
 
       <div class="prompt__box">
-        <div class="today__date">{{keywords.release_date|date:"M d"}} | Total:{{count}}</div>
-        <h2 class="prompt">{{key}}</h2>
-
-        <h4 class="prompt__translate">
-          {{keywords.translation}} | {{keywords.pronunciation}}
-        </h4>
+        <div class="today__date">{{keyword.release_date|date:"M d"}}</div>
+        <img src="{{nation.image.url}}" alt="" /></a>
+        <h3 class="prompt__translate">{{nation.name}}</h3>
       </div>
 
-      {% if keywords.is_show %}
-      <button class="write__button">
-        <a href="{% url 'go_create' %}">
-          <div class="fas fa-pen"></div>
-          <div class="write">Write Three Words!</div>
-        </a>
-      </button>
-      {%endif%}
 
       <div class="menu">
-        <div class="selected">
-          <a href="{% url 'readbylike' %}"><span>Popularity</span></a>
+        <div class="#">
+          {{nation.sum_of_like}}♥️
         </div>
-        <div class="unselected">
-          <a href="{% url 'readbydate' %}"><span id="nocolor">Recent</span></a>
+        <div class="#">
+          {{nation.total_post}} posts
         </div>
+        <div class="#">
+            {{nation.nation_point}} points
+          </div>
       </div>
+      
     </div>
 
     <ul class="content">
@@ -107,7 +99,7 @@
               </div>
             </div>
 
-            <a href="{% url 'heart' elem.id %}">
+            <a href="#">
               <div class="favorite">
                 <i class="fas fa-heart"></i>
                 <div class="favorite__count">{{elem.num_of_like}}</div>
