@@ -39,9 +39,9 @@ function scrollAppear(event) {
 
 function init() {
 
-  heart.forEach(function (elem) {
-    elem.addEventListener("click", handleHeart);
-  });
+  // heart.forEach(function (elem) {
+  //   elem.addEventListener("click", handleHeart);
+  // });
 
   scroll.forEach((item) => {
     scrollAppear(item);

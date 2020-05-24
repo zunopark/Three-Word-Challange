@@ -307,6 +307,7 @@ def nation_post(request, pk):
 
     counts = PageCounter.objects.all()[0]
 
+
     context = {
         'keyword' : key,
         'nation' : nation,
@@ -315,3 +316,35 @@ def nation_post(request, pk):
     }
 
     return render(request, 'nation_post.html', context)
+
+
+def fixedHome(request):
+    # 카운터
+    pgc = PageCounter.objects.all()[0]
+    pgc.count += 1
+    pgc.save()
+
+    # 오늘 제시어 절대 안변하는 변수
+    today_keyword = Keyword.objects.get(today=True)
+    
+    posts = Post.objects.all().filter(keyword=today_keyword)
+    posts = posts.order_by('-num_of_like')
+
+    first = today_keyword.name[0]
+    second = today_keyword.name[1]
+    third = today_keyword.name[2]
+
+    count = PageCounter.objects.all()[0]
+
+
+    context = {
+        'key' : today_keyword.name,
+        'posts' : posts,
+        'first' : first,
+        'second' : second,
+        'third' : third,
+        'keywords' : today_keyword,
+        'count' : count.count,
+    }
+
+    return render(request, 'index.html', context)

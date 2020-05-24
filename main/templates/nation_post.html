@@ -20,7 +20,7 @@
     <nav class="nav">
       <ul class="nav__list">
         <li class="nav__column">
-          <a href="{% url 'home' %}" class="nav__list-link">
+          <a href="{% url 'fixedHome' %}" class="nav__list-link">
             <i class="fas fa-home nav__selected"></i>
           </a>
         </li>
@@ -70,10 +70,11 @@
               <span class="nation"><img src="{{elem.nation.image.url}}" id="flag"/></span>
               <!-- <span class="nation">{{elem.nation_name}}</span> -->
               <span class="nikname">{{elem.nickname}}</span>
-              {{elem.release_date|date:"H:i"}}
+              {{elem.release_date|date:"H:i"}} 
+              <span class="small__keyword">{{elem.keyword.name}}</span>
             </div>
 
-            <button class="translate" data-id="{{elem.id}}" id="tr-button-{{elem.id}}">See the translation</button>
+            <!-- <button class="translate" data-id="{{elem.id}}" id="tr-button-{{elem.id}}">See the translation</button> -->
 
 
           </div>

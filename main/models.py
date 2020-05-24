@@ -237,8 +237,11 @@ class Keyword(models.Model):
     # 제시어 별 총 좋아요 수
     sum_of_like = models.IntegerField(default=0)
 
-    # 하루에 하나만 뽑기 위해
-    is_show = models.BooleanField(verbose_name="오늘 표시할 것인가", null=False, default=False)
+    # 다른 제시어 표시 변수
+    is_show = models.BooleanField(verbose_name="다른 제시어 표시 변수, 건드리지 말자", null=False, default=False)
+
+    # 홈 화면 고정 변수
+    today = models.BooleanField(verbose_name="오늘만 보이게 하려면 체크", null=False, default=False)
 
     # 제시어 제출 날짜
     release_date = models.DateTimeField()

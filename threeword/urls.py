@@ -7,7 +7,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name="home"),
+    path('', views.fixedHome, name="fixedHome"),
     path('gocreate', views.go_create, name="go_create"),
 
     path('posts/<int:pk>/', views.translate, name="translate"),
